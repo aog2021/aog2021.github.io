@@ -1,1 +1,681 @@
-Hello AOG Team!
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Ad On Group PH | WFH Form</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="js/html2pdf.bundle.min.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/generatePDF.js"></script>
+    <script type="text/javascript" src="js/form.js"></script>
+    <script type="text/javascript" src="js/dragdrop.js"></script>
+  </head>
+
+  <style>
+    * {
+      font-size: 14px;
+    }
+
+    body{
+      margin: 0;
+    }
+
+    p{
+      font-family: 'Roboto', sans-serif;
+      line-height: 20px;
+      color: rgb(53, 53, 53);
+    }
+    
+    textarea {
+      resize: none;
+    }
+    
+    a{
+      text-decoration: none;
+    }
+
+    button{
+      margin-top: 50px;
+    }
+
+    input:focus,
+    button:focus {
+      outline: none;
+    }
+
+    button:hover,
+    .reset:hover {
+      opacity: .8;
+    }
+
+    button:active,
+    .reset:active {
+      opacity: .5;
+    }
+
+    .container {
+      width: 80%;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      margin: 0 auto;
+      height: 100%;
+    }
+
+    .steps {
+      margin: 10px 0px;
+      position: relative;
+      height: 25px;
+    }
+
+    .steps > div {
+      position: absolute;
+      top: 0;
+      -webkit-transform: translate(-50%);
+      -ms-transform: translate(-50%);
+      transform: translate(-50%);
+      height: 25px;
+      padding: 0 5px;;
+      display: inline-block;
+      /* width: 135px; */
+      text-align: center;
+      -webkit-transition: .3s all ease;
+      transition: .3s all ease;
+    }
+
+    .steps > div > span {
+      line-height: 25px;
+      height: 25px;
+      margin: 0;
+      color: #777;
+      font-family: 'Roboto', sans-serif;
+      font-size: .9rem;
+      font-weight: 300;
+    }
+
+    .steps > div > .liner {
+      position: absolute;
+      height: 2px;
+      width: 0%;
+      left: 0;
+      top: 50%;
+      margin-top: -1px;
+      background: #999;
+      -webkit-transition: .3s all ease;
+      transition: .3s all ease;
+    }
+
+    .step-one {
+      left: 0;
+    }
+
+    .step-two {
+      left: 50%;
+      clip: rect(0, 0px, 25px, 0px);
+    }
+
+    .step-three {
+      left: 100%;
+      clip: rect(0, 0px, 25px, 0px);
+    }
+
+    .line {
+      width: 100%;
+      height: 5px;
+      background: #ddd;
+      position: relative;
+      border-radius: 10px;
+      overflow: visible;
+      margin-bottom: 20px;
+    }
+
+    .line .dot-move {
+      position: absolute;
+      top: 50%;
+      left: 0%;
+      width: 15px;
+      height: 15px;
+      -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+      background: #ddd;
+      border-radius: 50%;
+      -webkit-transition: .3s all ease;
+      transition: .3s all ease;
+    }
+
+    .line .dot {
+      position: absolute;
+      top: 50%;
+      width: 15px;
+      height: 15px;
+      left: 0;
+      background: #ddd;
+      border-radius: 50%;
+      -webkit-transition: .3s all ease;
+      transition: .3s all ease;
+      -webkit-transform: translate(-50%, -50%) scale(.5);
+      -ms-transform: translate(-50%, -50%) scale(.5);
+      transform: translate(-50%, -50%) scale(.5);
+    }
+
+    .line .dot.zero {
+      left: 0%;
+      background: #bbb;
+    }
+
+    .container.slider-one-active .dot.zero {
+      background: #5892fc;
+    }
+
+    .line .dot.center {
+      left: 50%;
+      background: #bbb
+    }
+
+    .line .dot.full {
+      left: 100%;
+      background: #bbb
+    }
+
+    .slider-ctr {
+      width: 100%;
+      align-self: center;
+      overflow: hidden;
+      overflow-y: scroll;
+    }
+
+    .slider {
+      overflow: hidden;
+      width: 100%;
+      display: flex;
+      -webkit-transition: .3s all ease;
+      transition: .3s all ease;
+      -webkit-transform: translate(0px) scale(1);
+      -ms-transform: translate(0px) scale(1);
+      transform: translate(0px) scale(1);
+      justify-content: center;
+    }
+
+    .container.slider-one-active .slider-two,
+    .container.slider-one-active .slider-three {
+      -webkit-transform: scale(.5);
+      -ms-transform: scale(.5);
+      transform: scale(.5);
+    }
+
+    .container.slider-two-active .slider-one,
+    .container.slider-two-active .slider-three {
+      -webkit-transform: scale(.5);
+      -ms-transform: scale(.5);
+      transform: scale(.5);
+    }
+
+    .container.slider-three-active .slider-one,
+    .container.slider-three-active .slider-two {
+      -webkit-transform: scale(.5);
+      -ms-transform: scale(.5);
+      transform: scale(.5);
+    }
+
+    .slider-one,
+    .slider-two,
+    .slider-three {
+      -webkit-transition: .3s all ease;
+      transition: .3s all ease;
+    }
+
+    .slider-one.hidden, 
+    .slider-two.hidden,
+    .slider-three.hidden {
+      transition: .3s all ease;
+      display: none;
+    }
+
+    .slider-form {
+      float: left;
+      width: 80%;
+      text-align: center;
+    }
+
+    .slider-form p {
+      text-align: left;
+    }
+
+    ul{
+      margin: 0;
+    }
+
+    ul li {
+      font-family: 'Roboto', sans-serif;
+      text-align: left;
+      line-height: 20px;
+      color: rgb(53, 53, 53);
+    }
+
+    .slider-form h2 {
+      font-size: 1.5rem;
+      font-family: 'Roboto', sans-serif;
+      font-weight: 300;
+      margin-bottom: 20px;
+      color: #999;
+      position: relative;
+    }
+
+    .slider-form h2 .yourname {
+      font-weight: 400;
+    }
+
+    .slider-form h3 {
+      font-size: 1.5rem;
+      font-family: 'Roboto', sans-serif;
+      font-weight: 300;
+      margin-bottom: 50px;
+      line-height: 1.5;
+      color: #999;
+      position: relative;
+    }
+
+    .slider-form h3 .balapa {
+      font-family: 'Pacifico', sans-serif;
+      display: inline-block;
+      color: #5892fc;
+      text-decoration: none
+    }
+
+    .slider-form [type="text"] {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 15px 0px;
+      background: #fff;
+      border: 1px solid transparent;
+      color: rgb(53, 53, 53);
+      font-size: 1rem;
+      font-family: 'Roboto', sans-serif;
+      position: relative;
+      z-index: 99;
+      outline: none;
+    }
+
+    .slider-form [type="text"]:focus {
+      background: white;
+      border: none;
+    }
+
+    .slider-form button,
+    .reset {
+      display: inline-block;
+      text-decoration: none;
+      background: #5892fc;
+      border: none;
+      color: white;
+      padding: 10px 25px;
+      font-size: 1rem;
+      border-radius: 3px;
+      cursor: pointer;
+      font-family: 'Roboto', sans-serif;
+      font-weight: 300;
+      position: relative;
+    }
+
+    /*  emot */
+
+    .label-ctr {
+      margin-bottom: 50px;
+    }
+
+    label.radio {
+      height: 55px;
+      width: 55px;
+      display: inline-block;
+      margin: 0 10px;
+      background: transparent;
+      position: relative;
+      border-radius: 50%;
+      cursor: pointer
+    }
+
+    label.radio input {
+      visibility: hidden
+    }
+
+    label.radio input:checked + .emot {
+      -webkit-transform: scale(1.25);
+      -ms-transform: scale(1.25);
+      transform: scale(1.25);
+    }
+
+    label.radio input:checked + .emot,
+    label.radio input:checked + .emot .mouth {
+      border-color: #5892fc;
+    }
+
+    label.radio input:checked + .emot:before,
+    label.radio input:checked + .emot:after {
+      background: #5892fc;
+    }
+
+    label.radio .emot {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: #fafafa;
+      border-radius: 50%;
+      border: 2px solid #ddd;
+      -webkit-transition: .3s all ease;
+      transition: .3s all ease;
+    }
+
+    label.radio .emot:before {
+      content: "";
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      width: 5px;
+      height: 10px;
+      background: #ddd;
+    }
+
+    label.radio .emot:after {
+      content: "";
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      width: 5px;
+      height: 10px;
+      background: #ddd;
+    }
+
+    label.radio .emot .mouth {
+      position: absolute;
+      bottom: 10px;
+      right: 15px;
+      left: 15px;
+      height: 15px;
+      border-radius: 50%;
+      border: 3px solid #ddd;
+      background: transparent;
+      clip: rect(0, 35px, 10px, 0);
+    }
+
+    label.radio .emot .mouth.smile {
+      -webkit-transform: rotate(180deg);
+      -ms-transform: rotate(180deg);
+      transform: rotate(180deg);
+    }
+
+    label.radio .emot .mouth.sad {
+      -webkit-transform: translateY(50%);
+      -ms-transform: translateY(50%);
+      transform: translateY(50%);
+    }
+
+    /*  center */
+
+    .container.center .line .dot-move {
+      left: 50%;
+      -webkit-animation: .3s anim 1;
+    }
+
+    .container.center .line .dot.center {
+      background: #5892fc;
+    }
+
+    .container.center .step-two {
+      clip: rect(0, 150px, 25px, 0px);
+    }
+
+    .container.center .step-one .liner {
+      width: 100%;
+    }
+
+    /*  full */
+    .container.full .line .dot-move {
+      left: 100%;
+      -webkit-animation: .3s anim 1;
+    }
+
+    .container.full .line .dot.full {
+      background: #5892fc;
+    }
+
+    .container.full .step-two,
+    .container.full .step-three {
+      clip: rect(0, 150px, 25px, 0px);
+    }
+
+    .container.full .step-one .liner,
+    .container.full .step-two .liner {
+      width: 100%;
+    }
+
+    /* datepicker */
+    .date-ctr{
+      display: flex;
+      flex-direction: row;
+    }
+    .date-ctr > div{
+      margin-right: 10px;
+    }
+
+    .date-ctr > div label {
+      float: left;
+      margin: 5px;
+      font-size: 13px;
+      color: #999;
+      font-family: 'Roboto', sans-serif;
+    }
+    .datepicker-input{
+      width: 100%;
+      padding: 10px;
+      font-family: 'Roboto', sans-serif;
+      text-transform: uppercase;
+      color: rgb(53, 53, 53);
+      border-radius: 8px;
+      background: white;
+    }
+
+    /* Other Forms */
+    .form-input{
+      border: 1px solid #c3c3c3;
+      border-radius: 15px;
+      padding: 15px;
+      margin: 15px 0px;
+    }
+
+    .form-input label{
+      float: left;
+      font-size: 15px;
+      color: #999;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    /* Drag/Drop */
+    #upload-img{
+      opacity: 0.1;
+      width: 10%;
+    }
+
+    #fileElem {
+      display: none;
+    }
+    .my-form {
+      margin-bottom: 10px;
+    }
+    #gallery {
+      margin-top: 10px;
+    }
+    #gallery img {
+      width: 150px;
+      margin-bottom: 10px;
+      margin-right: 10px;
+      vertical-align: middle;
+    }
+
+    .note {
+      width: 500px;
+      margin: 50px auto;
+      font-size: 1.1em;
+      color: #333;
+      text-align: justify;
+    }
+    #drop-zone {
+      border: 2px dashed #ccc;
+      border-radius: 20px;
+      /* width: 95%; */
+      padding: 20px;
+    }
+    #drop-zone p {
+      text-align: center;
+      font-size: 25px;
+      font-weight: bold;
+      color: #cecece;
+    }
+    #drop-zone.highlight {
+      border-color: purple;
+    }
+
+    @media screen and (max-width: 425px) and (min-width: 375px) {
+      .slider-form{
+        width: 100%;
+      }
+
+      .date-ctr{
+        flex-direction: column;
+      }
+      .date-ctr > div {
+        margin-right: 0;
+      }
+    }
+  </style>
+  <body>
+    <!-- <button onclick="generatePDF()">Download as PDF</button>
+    <div id="invoice">
+      <h1>Our Invoice</h1>
+    </div> -->
+
+    <div class="container slider-one-active">
+      <div class="steps">
+        <div class="step step-one">
+          <div class="liner"></div>
+          <span>Agreement</span>
+        </div>
+        <div class="step step-two">
+          <div class="liner"></div>
+          <span>Application Form</span>
+        </div>
+        <div class="step step-three">
+          <div class="liner"></div>
+          <span>Conclusion</span>
+        </div>
+      </div>
+      <div class="line">
+        <div class="dot-move"></div>
+        <div class="dot zero"></div>
+        <div class="dot center"></div>
+        <div class="dot full"></div>
+      </div>
+      <div class="slider-ctr">
+        <div class="slider">
+
+          <!-- First Slider -->
+          <form class="slider-form slider-one">
+            <h2>Telecommute Agreement</h2>
+            <p>The Work Health and Safety (WHS) checklist is designed to help employees and managers to assess the WHS risks at home, 
+              privately-funded or satellite office. The checklist should be read together with the ‘Work from home’ guideline. 
+            </p>
+            <p style="margin: 0">Guidelines are as follows:
+              <ul>
+                <li>Completion and submission of the 
+                  <a href="https://maps.finance.gov.au/sites/default/files/2019-08/form_151.pdf" target="_blank" rel="noreferrer"><b>WORK HEALTH AND SAFETY CHECKLIST.</b></a>
+                </li>
+                <li>Availability of alternative internet connection option.</li>
+                <li>Company issued units are to be used only.</li>
+              </ul>
+            </p>
+            <p style="margin: 0">Employees who will be approved of telecommute will be required of the following:
+              <ul>
+                <li>STRICT Time IN and OUT of HRIS (following the normal assigned working schedule). ​<b>NO GRACE PERIOD</b></li>
+                <li>Be online and responsive on all Work Related Messaging/Chat platforms (Slack, Skype, Google, etc.).</li>
+                <li>Be professional.</li>
+              </ul>
+            </p>
+            <p>WHS form is to be COMPLETED and UPLOADED within this form, along with a photo of your work station. 
+              <br/>
+              Failure to comply will result to disapproval of request. 
+            </p>
+            <p>
+              <b>NOTE: 
+                <br/>
+                The Company may terminate this agreement if there is an inability to deliver work due to technology limitations or other man-made degradation of service.
+              </b>
+            </p>
+            <button class="first next">Accept the terms and conditions</button>
+          </form>
+
+          <!-- 2nd Slider -->
+          <form class="slider-form slider-two hidden">
+            <h2>Application Form</h2>
+
+            <!-- DatePicker Container -->
+            <div class="date-ctr">
+              <div class="start-date">
+                <label for="start-date-input">Start</label>
+                <input id="start-date-input" type="date" class="datepicker-input" />
+              </div>
+              <div class="end-date">
+                <label for="end-date-input">End</label>
+                <input id="end-date-input" type="date" class="datepicker-input" />
+              </div>
+            </div>
+
+            <!-- Purpose/Workplace Forms -->
+            <div class="form-input purpose">
+              <label for="purpose">Purpose*</label>
+              <textarea id="purpose" type="text" type="purpose" rows="3" required maxlength="150"> </textarea>
+            </div>
+
+            <div class="form-input workplace_description">
+              <label for="workplace_description">Description of Workplace*</label>
+              <textarea id="workplace_description" type="text" type="workplace_description" rows="3" required maxlength="150"> </textarea>
+            </div>
+
+            <!-- Drag/Drop Files -->
+            <div id="drop-zone" ondrop="drop(event)" ondragover="allowDrop(event)">
+              <div class="my-form">
+                <p>Drag or Drop Images/Files or Click to Upload</p>
+                <input type="file" id="fileElem" multiple accept="image/*" onchange="handleFiles(event)">
+                <img class="button" id="upload-img" for="fileElem">
+                <label class="button" for="fileElem">Select some files</label>
+              </div>
+              <div id="gallery"></div>
+            </div>
+            
+            <!-- Form Note -->
+            <p style="margin-bottom: 0;">
+              Note: <br/>
+              <ul>
+                <li>To upload <b>Images/Files</b>, click the "Drag or drop images/files or Click to upload" and select the images you wish to upload or drag and drop your images.</li>
+                <li>Upload atleast one image to show your workplace at home.</li>
+              </ul>
+            </p>
+
+            <button class="second previous">Back</button>
+            <button class="second next">Submit</button>
+          </form>
+
+          <!-- Third Slider -->
+          <div class="slider-form slider-three hidden">
+            <h2>Hello, <span class="yourname"></span></h2>
+            <h3>Thank you for your input!
+              </h3>
+            <button class="third previous">Back</button>
+            <a class="reset" href="https://codepen.io/balapa/pen/XbXVRg" target="_blank">Reset</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
