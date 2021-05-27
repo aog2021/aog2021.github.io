@@ -34,13 +34,17 @@
       text-decoration: none;
     }
 
-    button{
-      margin-top: 10px;
+    .button-container{
+      height: 6vh; 
+      display: flex;
+      text-align: center;
+      place-content: center;
+      align-items: center;
     }
 
-    .button-container{
-      height: 8%; 
-      text-align: center;
+
+    .button-container button{
+      margin: 0px 2px;
     }
 
     input:focus,
@@ -71,17 +75,20 @@
     .steps-container{
       height: 8vh;
       padding: 0px 50px;
+      /* display: flex;
+      align-items: center; */
     }
 
     .steps {
       margin: 10px 0px;
       position: relative;
-      height: 25%;
+      height: 30%;
+      margin-bottom: 8px;
     }
 
     .steps > div {
       position: absolute;
-      top: 0;
+      top: -5px;
       -webkit-transform: translate(-50%);
       -ms-transform: translate(-50%);
       transform: translate(-50%);
@@ -267,12 +274,12 @@
     }
 
     .slider-wrapper{
-      height: 90vh; 
+      /* height: 90vh;  */
       overflow: hidden;
     }
     
     .slider-form-container{
-      height: 92%; 
+      height: 86vh; 
       overflow: auto;
     }
 
@@ -595,10 +602,6 @@
         font-size: 12px;
       }
       
-      button{
-        margin-top: 10px;
-      }
-      
       .slider-form{
         width: 100%;
       }
@@ -616,10 +619,6 @@
     @media screen and (min-width: 425px) {
       * {
         font-size: 12px;
-      }
-      
-      button{
-        margin-top: 10px;
       }
       
       .slider-form{
@@ -642,10 +641,6 @@
         font-size: 12px;
       }
       
-      button{
-        margin-top: 10px;
-      }
-      
       .slider-form{
         width: 100%;
       }
@@ -664,10 +659,6 @@
     @media screen and (min-width: 1024px) {
       .form-input label{
         width: 14%;
-      }
-
-      button{
-        margin-top: 10px;
       }
     }
 
