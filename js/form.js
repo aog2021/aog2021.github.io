@@ -1,5 +1,6 @@
 window.onload = function () {
     document.getElementById("upload-img").src="./images/cloud-computing.png";
+    document.getElementById("speed-test-img").src="./images/speed-test.png";
 }
 
 $(document).on("click", ".first", function(e){
