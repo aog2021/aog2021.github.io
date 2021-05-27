@@ -8,6 +8,7 @@ $(document).on("click", ".first", function(e){
         sliderOneContainer = $(".slider-ctr .slider .slider-one");
         sliderTwoContainer = $(".slider-ctr .slider .slider-two");
     container.addClass("center slider-two-active").removeClass("full slider-one-active");
+    $(".line-progress").css("width", "50%");
     sliderOneContainer.addClass("hidden");
     sliderTwoContainer.removeClass("hidden");
     e.preventDefault();
@@ -20,6 +21,7 @@ $(document).on("click", ".second.next", function(e){
         sliderThreeContainer = $(".slider-ctr .slider .slider-three");
         container = $(".container");
     container.addClass("full slider-three-active").removeClass("center slider-two-active slider-one-active");
+    $(".line-progress").css("width", "100%");
     sliderTwoContainer.addClass("hidden");
     sliderThreeContainer.removeClass("hidden");
     name = name.val();
@@ -37,6 +39,7 @@ $(document).on("click", ".second.previous", function(e){
         sliderTwoContainer = $(".slider-ctr .slider .slider-two");
 
     container.addClass("slider-one-active").removeClass("full center slider-two-active");
+    $(".line-progress").css("width", "0%");
     sliderOneContainer.removeClass("hidden");
     sliderTwoContainer.addClass("hidden");
     e.preventDefault();
@@ -48,6 +51,7 @@ $(document).on("click", ".third.previous", function(e){
         sliderThreeContainer = $(".slider-ctr .slider .slider-three");
 
     container.addClass("center slider-two-active").removeClass("full slider-three-active");
+    $(".line-progress").css("width", "50%");
     sliderTwoContainer.removeClass("hidden");
     sliderThreeContainer.addClass("hidden");
     e.preventDefault();

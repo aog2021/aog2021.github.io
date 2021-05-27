@@ -147,6 +147,16 @@
       overflow: visible;
     }
 
+    .line-progress{
+      width: 0%;
+      height: 5px;
+      background: #5892fc;
+      position: relative;
+      border-radius: 10px;
+      overflow: visible;
+      transition: .3s all ease;
+    }
+
     .line .dot-move {
       position: absolute;
       top: 50%;
@@ -156,7 +166,7 @@
       -webkit-transform: translate(-50%, -50%);
       -ms-transform: translate(-50%, -50%);
       transform: translate(-50%, -50%);
-      background: #ddd;
+      background: #5892fc;
       border-radius: 50%;
       -webkit-transition: .3s all ease;
       transition: .3s all ease;
@@ -449,8 +459,10 @@
       -webkit-animation: .3s anim 1;
     }
 
-    .container.center .line .dot.center {
+    .container.center .line .dot.center, .container.center .line .dot.zero {
       background: #5892fc;
+      width: 30px;
+      height: 30px;
     }
 
     .container.center .step-two {
@@ -468,8 +480,10 @@
       -webkit-animation: .3s anim 1;
     }
 
-    .container.full .line .dot.full {
+    .container.full .line .dot.full, .container.full .line .dot.zero, .container.full .line .dot.center {
       background: #5892fc;
+      width: 30px;
+      height: 30px;
     }
 
     .container.full .step-two,
@@ -688,6 +702,7 @@
           </div>
         </div>
         <div class="line">
+          <div class="line-progress"></div>
           <div class="dot-move"></div>
           <div class="dot zero"></div>
           <div class="dot center"></div>
