@@ -38,6 +38,11 @@
       margin-top: 10px;
     }
 
+    .button-container{
+      height: 8%; 
+      text-align: center;
+    }
+
     input:focus,
     button:focus {
       outline: none;
@@ -60,10 +65,12 @@
       flex-direction: column;
       margin: 0 auto;
       height: 100%;
+      overflow: hidden;
     }
 
     .steps-container{
       height: 8vh;
+      padding: 0px 50px;
     }
 
     .steps {
@@ -257,6 +264,16 @@
       text-align: left;
       line-height: 20px;
       color: rgb(53, 53, 53);
+    }
+
+    .slider-wrapper{
+      height: 90vh; 
+      overflow: hidden;
+    }
+    
+    .slider-form-container{
+      height: 92%; 
+      overflow: auto;
     }
 
     .slider-form h2 {
@@ -666,8 +683,8 @@
       <h1>Our Invoice</h1>
     </div> -->
 
-    <div class="container slider-one-active" style="overflow: hidden;">
-      <div class="steps-container" style="padding: 0px 50px;">
+    <div class="container slider-one-active">
+      <div class="steps-container">
         <div class="steps">
           <div class="step step-one">
             <span class="liner">Agreement</span>
@@ -690,8 +707,8 @@
       <div class="slider-ctr">
         <div class="slider">
           <!-- First Slider -->
-          <div class="slider-one" style="height: 92vh; overflow: hidden;">
-            <div style="height: 92%; overflow: auto;">
+          <div class="slider-one slider-wrapper">
+            <div class="slider-form-container">
               <form class="slider-form">
                 <h2>Work From Home Agreement</h2>
                 <p>The Work Health and Safety (WHS) checklist is designed to help employees and managers to assess the WHS risks at home, privately-funded or satellite office. 
@@ -731,14 +748,14 @@
                 </p>
               </form>
             </div>
-            <div style="height: 8%; text-align: center;">
+            <div class="button-container">
               <button class="first next">Accept the terms and conditions</button>
             </div>
           </div>
 
           <!-- 2nd Slider -->
-          <div class="slider-two hidden" style="height: 90vh; overflow: hidden;">
-            <div style="height: 92%; overflow: auto;">
+          <div class="slider-two hidden slider-wrapper">
+            <div class="slider-form-container">
               <form class="slider-form">
                 <h2>Application Form</h2>
 
@@ -798,7 +815,7 @@
                 </p>
               </form>
             </div>
-            <div style="height: 8%; text-align: center;">
+            <div class="button-container">
               <button class="second previous">Back</button>
               <button class="second next">Review</button>
             </div>
@@ -806,13 +823,13 @@
 
 
           <!-- Third Slider -->
-          <div class="slider-three hidden" style="height: 90vh; overflow: hidden;">
-            <div style="height: 92%; overflow: auto;">
+          <div class="slider-three hidden slider-wrapper">
+            <div class="slider-form-container">
               <form class="slider-form">
                 <h2>Hello! Review here...</h2>
               </form>
             </div>
-            <div style="height: 8%; text-align: center;">
+            <div class="button-container">
               <button class="third previous">Back</button>
               <a class="reset" href="https://codepen.io/balapa/pen/XbXVRg" target="_blank">Download PDF</a>
             </div>
