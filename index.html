@@ -4,11 +4,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Ad On Group PH | WFH Form</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script src="js/html2pdf.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <script src="js/jquery.min.js"></script>
+    <script src="js/html2pdf.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
     <script type="text/javascript" src="js/generatePDF.js"></script>
-    <script type="text/javascript" src="js/form.js"></script>
     <script type="text/javascript" src="js/dragdrop.js"></script>
+    <script type="text/javascript" src="js/form.js"></script>
   </head>
 
   <style>
@@ -25,13 +27,21 @@
       line-height: 20px;
       color: rgb(53, 53, 53);
     }
-    
-    textarea {
-      resize: none;
+    h1{
+      margin: 0;
+    }
+    b{
+      font-family: 'Roboto', sans-serif;
+      line-height: 20px;
+      color: rgb(53, 53, 53);
     }
     
     a{
       text-decoration: none;
+    }
+  
+    .input-group-text{
+      padding: 8px 10px;
     }
 
     .button-container{
@@ -42,6 +52,14 @@
       align-items: center;
     }
 
+    .remove-btn{
+      width: 100%;
+      border-radius: 0;
+      padding: 3px;
+      background: #de2e2e;
+      font-size: 11px;
+      font-weight: bold;
+    }
 
     .button-container button{
       margin: 0px 2px;
@@ -63,13 +81,15 @@
     }
 
     .container {
-      width: 80%;
+      width: 100%;
       display: flex;
       justify-content: center;
       flex-direction: column;
       margin: 0 auto;
       height: 100%;
       overflow: hidden;
+      max-width: 100%;
+      padding: 0;
     }
 
     .steps-container{
@@ -283,8 +303,14 @@
       color: rgb(53, 53, 53);
     }
 
+    .row{
+      width: 100%;
+      align-self: center;
+    }
+
     .slider-wrapper{
       /* height: 90vh;  */
+      width: 100%;
       overflow: hidden;
     }
     
@@ -292,9 +318,20 @@
       height: 86vh; 
       overflow: auto;
     }
+    .review-header{
+      text-align: center;
+    }
+    .review-header h2 {
+      font-size: 2.5rem;
+      font-family: 'Roboto', sans-serif;
+      font-weight: 300;
+      margin-bottom: 20px;
+      color: #999;
+      position: relative;
+    }
 
     .slider-form h2 {
-      font-size: 1.5rem;
+      font-size: 2.5rem;
       font-family: 'Roboto', sans-serif;
       font-weight: 300;
       margin-bottom: 20px;
@@ -323,7 +360,7 @@
       text-decoration: none
     }
 
-    .slider-form [type="text"] {
+    /* .slider-form [type="text"] {
       width: 100%;
       box-sizing: border-box;
       padding: 5px 0px;
@@ -340,7 +377,7 @@
     .slider-form [type="text"]:focus {
       background: white;
       border: none;
-    }
+    } */
 
     button,
     .reset {
@@ -501,10 +538,11 @@
     .date-ctr{
       display: flex;
       flex-direction: row;
-      margin-bottom: 5px;
+      margin-bottom: 12px;
+      justify-content: space-between;
     }
     .date-ctr > div{
-      margin-right: 10px;
+      width: 49%;
     }
 
     .date-ctr > div label {
@@ -520,9 +558,9 @@
       font-family: 'Roboto', sans-serif;
       text-transform: uppercase;
       color: rgb(53, 53, 53);
-      border-radius: 8px;
+      border-radius: 3px;
       background: white;
-      border: 1px solid #c3c3c3;
+      border: 1px solid #ced4da;
     }
 
     /* Other Forms */
@@ -557,31 +595,71 @@
       font-family: 'Roboto', sans-serif;
     }
 
-    /* Drag/Drop */
+    /* IMAGES */
     #upload-img{
       opacity: 0.1;
       width: 10%;
       margin-top: -10px;
     }
+    #speed-test-img{
+      max-width: 40%;
+    }
+    #aog-logo{
+      max-width: 10%;
+    }
+    #review-uploads-PDF {
+      margin-top: 10px;
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    #review-uploads-PDF > div {
+      max-width: 45%;
+      margin: 10px 5px;
+    }
+    #review-uploads-PDF img {
+      width: 100%;
+      vertical-align: middle;
+      border-radius: 5px;
+    }
+    #review-uploads {
+      margin-top: 10px;
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+    #review-uploads > div {
+      max-width: 32%;
+      margin: 10px 5px;
+    }
+    #review-uploads img {
+      width: 100%;
+      vertical-align: middle;
+      border-radius: 5px;
+    }
 
+    /* Drag/Drop */
     #fileElem {
       display: none;
     }
-    .my-form {
-      margin-bottom: 10px;
-    }
     #gallery {
       margin-top: 10px;
-      display: flex;
       width: 100%;
-      overflow: auto;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+    #gallery > div {
+      max-width: 32%;
+      margin: 10px 5px;
     }
     #gallery img {
-      width: 15%;
-      margin-bottom: 10px;
-      margin-right: 10px;
+      width: 100%;
       vertical-align: middle;
-      height: 100%;
+      border-radius: 5px;
     }
 
     .note {
@@ -594,9 +672,9 @@
     #drop-zone {
       border: 2px dashed #ccc;
       border-radius: 20px;
+      padding: 70px;
       /* width: 95%; */
-      padding: 20px;
-      margin-top: 8px;
+      margin: 8px 0px;
     }
     #drop-zone p {
       text-align: center;
@@ -607,8 +685,26 @@
     #drop-zone.highlight {
       border-color: purple;
     }
-    #speed-test-img{
-      max-width: 60%;
+
+    /* REVIEW FORM */
+    #review-details .list-group-item{
+      padding: 2rem 1rem;
+      display: flex !important;
+      /* list-style: */
+    }
+
+    .list-group-item .list-label{
+      font-size: 16px;
+      opacity: 0.6;
+    }
+    .list-group-item .list-input{
+      font-size: 16px;
+      overflow-wrap: break-word;
+      width: 50%;
+    }
+
+    .list-input b{
+      font-size: 15px;
     }
 
     @media screen and (min-width: 300px) {
@@ -616,16 +712,9 @@
         font-size: 12px;
       }
       
-      .slider-form{
-        width: 100%;
-      }
-
-      .date-ctr{
+      /* .date-ctr{
         flex-direction: column;
-      }
-      .date-ctr > div {
-        margin-right: 0;
-      }
+      } */
       .form-input label{
         width: 50%;
       }
@@ -635,16 +724,9 @@
         font-size: 12px;
       }
       
-      .slider-form{
-        width: 100%;
-      }
-
-      .date-ctr{
+      /* .date-ctr{
         flex-direction: column;
-      }
-      .date-ctr > div {
-        margin-right: 0;
-      }
+      } */
       .form-input label{
         width: 40%;
       }
@@ -655,16 +737,9 @@
         font-size: 12px;
       }
       
-      .slider-form{
-        width: 100%;
-      }
-
-      .date-ctr{
+      /* .date-ctr{
         flex-direction: column;
-      }
-      .date-ctr > div {
-        margin-right: 0;
-      }
+      } */
       .form-input label{
         width: 18%;
       }
@@ -683,11 +758,6 @@
     }
   </style>
   <body>
-    <!-- <button onclick="generatePDF()">Download as PDF</button>
-    <div id="invoice">
-      <h1>Our Invoice</h1>
-    </div> -->
-
     <div class="container slider-one-active">
       <div class="steps-container">
         <div class="steps">
@@ -712,10 +782,10 @@
 
       <div class="slider-ctr">
         <div class="slider">
-          <!-- First Slider -->
+          <!-- First Slider | AGREEMENT -->
           <div class="slider-one slider-wrapper">
             <div class="slider-form-container">
-              <form class="slider-form">
+              <form class="slider-form needs-validation" novalidate>
                 <h2>Work From Home Agreement</h2>
                 <p>The Work Health and Safety (WHS) checklist is designed to help employees and managers to assess the WHS risks at home, privately-funded or satellite office. 
                   The checklist should be read together with the ‘Work from home’ guideline.
@@ -736,7 +806,7 @@
                     <li>Be professional.</li>
                   </ul>
                 </p>
-                <p><b>WHS form</b> is to be COMPLETED and submitted to your Line Manager, 
+                <p><b>WFH form</b> is to be COMPLETED and submitted to your Line Manager, 
                   along with a photo of your work station and a screenshot of your Internet Speed (<a href="https://www.speedtest.net/" target="_blank" rel="noreferrer"><b>Ookla</b></a>). See sample below.
                   <br/>
                   Failure to comply will result to disapproval of request. 
@@ -759,7 +829,7 @@
             </div>
           </div>
 
-          <!-- 2nd Slider -->
+          <!-- 2nd Slider | APPLICATION FORM-->
           <div class="slider-two hidden slider-wrapper">
             <div class="slider-form-container">
               <form class="slider-form">
@@ -769,7 +839,7 @@
                 <div class="date-ctr">
                   <div class="start-date">
                     <label for="start-date-input">Start</label>
-                    <input id="start-date-input" type="date" class="datepicker-input" />
+                    <input id="start-date-input" type="date" class="datepicker-input" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"/>
                   </div>
                   <div class="end-date">
                     <label for="end-date-input">End</label>
@@ -778,28 +848,38 @@
                 </div>
 
                 <!-- Purpose/Workplace Forms -->
-                <div class="form-input fullName">
-                  <label for="fullName">Full Name:</label>
-                  <input id="fullName" type="text" type="fullName" required />
+                <div class="row" style="gap: 2rem!important">
+                  <div class="col p-0">
+                    <div class="form-floating mb-3">
+                      <input type="text" class="form-control" id="fullName" placeholder="test" required>
+                      <label for="floatingInput">Full Name</label>
+                    </div>
+                  </div>
+  
+                  <div class="col p-0">
+                    <div class="form-floating mb-3">
+                      <input type="text" class="form-control" id="position" placeholder="test">
+                      <label for="floatingInput">Position</label>
+                    </div>
+                  </div>
                 </div>
 
-                <div class="form-input position">
-                  <label for="position">Position:</label>
-                  <input id="position" type="text" type="position" required />
+                <div class="col p-0">
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="lineManager" placeholder="test">
+                    <label for="floatingInput">Line Manager</label>
+                  </div>
                 </div>
 
-                <div class="form-input lineManager">
-                  <label for="lineManager">Line Manager:</label>
-                  <input id="lineManager" type="text" type="lineManager" required />
-                </div>
-
-                <div class="form-text-area purpose">
-                  <label for="purpose">Reason for WFH: (Please explain in detail)</label>
-                  <textarea id="purpose" type="text" type="purpose" rows="5" required> </textarea>
+                <div class="col p-0">
+                  <div class="form-floating mb-3">
+                    <textarea type="text" class="form-control" id="reason" placeholder="test" style="height: 100px"></textarea>
+                    <label for="floatingInput">Reason for WFH: (Please explain in detail)</label>
+                  </div>
                 </div>
 
                 <!-- Drag/Drop Files -->
-                <div id="drop-zone" ondrop="drop(event)" ondragover="allowDrop(event)">
+                <div id="drop-zone" ondrop="drop(event)">
                   <div class="my-form">
                     <p>Drag or Drop Images/Files or Click to Upload</p>
                     <input type="file" id="fileElem" multiple accept="image/*" onchange="handleFiles(this.files)">
@@ -808,36 +888,128 @@
                       <img class="button" id="upload-img" for="fileElem">
                     </label>
                   </div>
-                </div>
-                <div id="gallery"></div>
-                
+                </div>                
                 <!-- Form Note -->
                 <p style="margin-bottom: 0;">
                   Note: <br/>
                   <ul>
-                    <li>To upload <b>Images/Files</b>, click the "Drag or drop images/files or Click to upload" and select the images you wish to upload or drag and drop your images.</li>
-                    <li>Upload atleast one image to show your workplace at home.</li>
+                    <li>Please upload latest photo(s) of workplace and recently screenshot of Internet speed; <i>previously submitted files may be invalidated which will result to unapproved request.</i></li>
+                    <li>Image size must be on or below <b>2MB</b></li>
                   </ul>
                 </p>
+
+                <div id="gallery"></div>
               </form>
             </div>
             <div class="button-container">
               <button class="second previous">Back</button>
-              <button class="second next">Review</button>
+              <button class="second next" type="submit">Review</button>
             </div>
           </div>
 
-
-          <!-- Third Slider -->
+          <!-- Third Slider | REVIEW FORM -->
           <div class="slider-three hidden slider-wrapper">
             <div class="slider-form-container">
-              <form class="slider-form">
-                <h2>Hello! Review here...</h2>
-              </form>
+              <div class="review-header mb-4">
+                <h2 style="margin: 0">Review Form</h2>
+                <b class="mb-4" style="font-size: 15px;" >Once completed, please save as PDF and email the copy directly to your Line Manager.</b>
+              </div>
+              <div class="slider-form">
+                <div style="opacity: 0.6; font-family: 'Roboto', sans-serif;" class="mb-2">
+                  <h1 class="text-start">Details</h1>
+                  <p>Please double check the information below</p>
+                </div>
+                <div class="p-3 mb-5 bg-body rounded" style="box-shadow: 0 0.5rem 1rem rgb(96 96 96 / 15%)">
+                  <div class="text-start">
+                    <!-- <img id="aog-logo"> -->
+                  </div>
+                  <div>
+                    <div id="review-details">
+                      <ul class="list-group list-group-flush">
+                        <li class="list-group-item row align-items-start">
+                          <div class="list-label col">Date</div>
+                          <div class="list-input col date"></div>
+                        </li>
+                        <li class="list-group-item row align-items-start">
+                          <div class="list-label col">Full Name</div>
+                          <div class="list-input col full-name"></div>
+                        </li>
+                        <li class="list-group-item row align-items-start">
+                          <div class="list-label col">Position</div>
+                          <div class="list-input col position"></div>
+                        </li>
+                        <li class="list-group-item row align-items-start">
+                          <div class="list-label col">Line Manager</div>
+                          <div class="list-input col line-manager"></div>
+                        </li>
+                        <li class="list-group-item row align-items-start">
+                          <div class="list-label col">Reason</div>
+                          <div class="list-input col reason"></div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div style="opacity: 0.6; font-family: 'Roboto', sans-serif;" class="mb-2">
+                  <h1 class="text-start">Uploads</h1>
+                  <p>Please double check the files below</p>
+                </div>
+                <div id="review-uploads"></div>
+              </div>
+
+              <div style="display: none">
+                <div class="slider-form" id="review-form">
+                  <h2 style="margin: 0; color: black; font-size: 26px;" class="pt-5 pb-5 fw-bold">AD ON GROUP PH</h2>
+                  <div 
+                    style="background: #5892fc; color: white; padding:10px 20px; font-family: 'Roboto', sans-serif;" 
+                    class="m-0"
+                  >
+                    <h1 class="text-start" style="font-size: 23px;">Details</h1>
+                  </div>
+                  <div style="border: 1px solid #e1ebff">
+                    <div class="shadow-sm p-2 mb-1 bg-body rounded">
+                      <div class="text-start">
+                        <img id="aog-logo" style="width: 10%">
+                      </div>
+                      <div>
+                        <div id="review-details">
+                          <ul class="list-group list-group-flush">
+                            <li class="list-group-item row align-items-start" style="padding: 1.5rem 1rem;">
+                              <div class="list-label col">Date</div>
+                              <div class="list-input col date"></div>
+                            </li>
+                            <li class="list-group-item row align-items-start" style="padding: 1.5rem 1rem;">
+                              <div class="list-label col">Full Name</div>
+                              <div class="list-input col full-name"></div>
+                            </li>
+                            <li class="list-group-item row align-items-start" style="padding: 1.5rem 1rem;">
+                              <div class="list-label col">Position</div>
+                              <div class="list-input col position"></div>
+                            </li>
+                            <li class="list-group-item row align-items-start" style="padding: 1.5rem 1rem;">
+                              <div class="list-label col">Line Manager</div>
+                              <div class="list-input col line-manager"></div>
+                            </li>
+                            <li class="list-group-item row align-items-start" style="padding: 1.5rem 1rem;">
+                              <div class="list-label col">Reason</div>
+                              <div class="list-input col reason"></div>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div style="background: #5892fc; color: white; padding:10px 20px; font-family: 'Roboto', sans-serif;" class="m-0 mt-3">
+                    <h1 class="text-start" style="font-size: 23px;">Uploads</h1>
+                  </div>
+                  <div id="review-uploads-PDF"></div>
+                </div>
+              </div>
+
             </div>
             <div class="button-container">
               <button class="third previous">Back</button>
-              <a class="reset" href="https://codepen.io/balapa/pen/XbXVRg" target="_blank">Download PDF</a>
+              <button onclick="generatePDF()">Download as PDF</button>
             </div>
           </div>
         </div>

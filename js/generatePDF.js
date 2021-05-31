@@ -1,19 +1,13 @@
 function generatePDF() {
-    // // Choose the element that our invoice is rendered in.
-    // const element = document.getElementById("invoice");
-    // // Choose the element and save the PDF for our user.
-    // html2pdf()
-    //   .from(element)
-    //   .save();
+    let element = document.getElementById('review-form');
 
-    var element = document.getElementById('invoice');
-    var opt = {
-        margin:       1,
-        filename:     'myfile.pdf',
-        image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { scale: 1 },
-        jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
-    };
+    let opt = {
+        margin: 0, 
+        filename: 'AOG_PH_FORM.pdf', 
+        image: {type: 'jpg', quality: 0.50}, 
+        html2canvas: {scale: 1.2, dpi: 192, letterRendering: true, useCORS: true}, 
+        jsPDF: {unit: 'in', format: [8.50, 14.00], orientation: 'portrait'
+   }};
 
     // New Promise-based usage:
     html2pdf().set(opt).from(element).save();
